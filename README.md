@@ -1,85 +1,143 @@
-# Personal Finance Tracker
+# Personal Finance Tracker — 个人财务记账系统
 
-个人财务记账系统，第一版按单用户闭环设计：
+> A full-stack personal finance management application built with Spring Boot 3 and Vue 3.
+> 基于 Spring Boot 3 + Vue 3 的全栈个人财务管理应用，支持账户管理、账单记录、预算控制和可视化统计。
 
-- `account` 账户管理
-- `category` 分类管理
-- `bill` 账单管理
-- `statistics` 统计看板
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4-brightgreen)](https://spring.io/projects/spring-boot)
+[![Vue](https://img.shields.io/badge/Vue-3.x-4fc08d)](https://vuejs.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)](https://www.mysql.com/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ed)](https://docs.docker.com/compose/)
+[![MyBatis-Plus](https://img.shields.io/badge/MyBatis--Plus-3.x-orange)](https://baomidou.com/)
 
-## 启动方式
+## 功能模块 / Features
 
-这个项目按本地常驻运行设计，推荐使用 Docker 一键拉起前端、后端和 MySQL。
+| 模块 | 说明 |
+|------|------|
+| **账户管理 (Account)** | 管理资金账户（现金、银行卡、信用卡、支付宝、微信等），支持余额追踪 |
+| **分类管理 (Category)** | 自定义收支分类，支持收入/支出双向分类，可设置预算 |
+| **账单管理 (Bill)** | 记录每一笔收支，支持日期、金额、分类、账户、备注，分页查询与筛选 |
+| **统计看板 (Dashboard)** | 月度收支汇总、分类支出占比、月度趋势图、账户余额一览 |
+| **预算管理 (Budget)** | 为分类设置月度预算，实时查看预算使用进度与超支提醒 |
 
-1. Docker 一键启动：
+## 技术栈 / Tech Stack
+
+### 后端 (Backend)
+- **Spring Boot 3.4** — 应用框架
+- **MyBatis-Plus 3.x** — ORM 与分页
+- **MySQL 8.0** — 关系型数据库
+- **Docker** — 容器化部署
+
+### 前端 (Frontend)
+- **Vue 3** (Composition API + `<script setup>`)
+- **Vue Router 4** — 客户端路由
+- **Pinia** — 状态管理
+- **Vite** — 构建工具
+- **TypeScript** — 类型安全
+- **Axios** — HTTP 请求封装
+
+### 运维 (DevOps)
+- **Docker Compose** — 一键启动全栈服务
+- **Nginx** — 前端静态资源服务
+
+## 快速开始 / Quick Start
+
+### Docker 一键启动（推荐）
 
 ```bash
+git clone https://github.com/713469/personalFinance.git
+cd personalFinance
 docker compose up -d --build
 ```
 
-2. 打开页面：
+启动后访问：
 
-```text
-前端: http://localhost:45173
-后端: http://localhost:48080
-MySQL: localhost:43306
-```
+| 服务 | 地址 |
+|------|------|
+| 前端页面 | http://localhost:45173 |
+| 后端 API | http://localhost:48080 |
+| MySQL | localhost:43306 |
 
-3. 本地开发启动也保留：
+### 本地开发
+
+**后端：**
 
 ```bash
 cd backend
+# 需要本地 MySQL 运行在 43306，或修改 application.yml
 mvn spring-boot:run
+```
 
+**前端：**
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-前端开发服务器默认把 `/api` 代理到 `http://localhost:48080`，如果容器内运行会自动切到后端服务名。
+前端开发服务器默认将 `/api` 代理到 `http://localhost:48080`。
 
-## 数据库
+## 数据库 / Database
 
-初始化脚本在 `db/schema.sql`。第一次启动 MySQL 容器时会自动执行。
+初始化脚本位于 `db/schema.sql`，Docker 首次启动 MySQL 容器时自动执行。
 
-如果需要重新初始化数据库：
+重新初始化数据库：
 
 ```bash
 docker compose down -v
 docker compose up -d --build
 ```
 
-## 前端结构
+## 项目结构 / Project Structure
 
-- `src/layouts` - 页面布局
-- `src/pages` - 路由页面
-- `src/shared/components` - 可复用组件
-- `src/shared/stores` - 状态管理与后端数据聚合
-- `src/shared/api` - API 请求封装
-- `src/shared/types` - 前端视图类型与后端响应类型
-- `src/shared/utils` - 格式化、颜色等纯工具
-- `src/shared/directives` - 通用交互指令，例如点击波纹
-- `src/shared/navigation.ts` - 主导航配置
-- `src/styles` - 全局样式
+```
+personalfinancetracker/
+├── backend/                    # Spring Boot 后端
+│   ├── src/main/java/.../
+│   │   ├── account/            # 账户模块 (controller/service/mapper/entity/dto)
+│   │   ├── bill/               # 账单模块
+│   │   ├── budget/             # 预算模块
+│   │   ├── category/           # 分类模块
+│   │   ├── statistics/         # 统计看板模块
+│   │   ├── common/             # 统一返回、异常处理、分页
+│   │   └── config/             # MyBatis-Plus 配置
+│   └── src/main/resources/
+│       └── application.yml     # 应用配置
+├── frontend/                   # Vue 3 前端
+│   └── src/
+│       ├── pages/              # 路由页面 (Dashboard/Bill/Account/Category/Budget)
+│       ├── shared/
+│       │   ├── components/     # 可复用组件 (对话框/选择器/统计卡片等)
+│       │   ├── stores/         # Pinia 状态管理
+│       │   ├── api/            # Axios 请求封装
+│       │   ├── types/          # TypeScript 类型定义
+│       │   ├── utils/          # 格式化、颜色工具
+│       │   └── directives/     # 交互指令 (点击波纹等)
+│       ├── layouts/            # 页面布局
+│       ├── router/             # 路由配置
+│       └── styles/             # 全局样式
+├── db/
+│   └── schema.sql              # 数据库初始化脚本
+└── docker-compose.yml          # Docker 编排
+```
 
-前端已接入后端接口，页面切换、按钮点击波纹、卡片 hover 等动态效果集中在布局、指令和全局样式中维护。
+## 设计约定 / Design Notes
 
-## 后端结构
+- **无 Lombok**：所有 Getter/Setter/构造器均手写或通过 IDE 生成，保持代码可读性
+- **BigDecimal 金额**：所有金额字段使用 `BigDecimal`，避免浮点精度问题
+- **统一响应格式**：`ApiResponse<T>` 包装所有接口返回，`PageResult<T>` 统一分页结构
+- **单用户闭环**：第一版按个人使用设计，不涉及多租户与权限
 
-- `common` - 统一返回、异常、分页
-- `config` - MyBatis-Plus 配置
-- `account` - 账户模块
-- `category` - 分类模块
-- `bill` - 账单模块
-- `statistics` - 看板统计模块
+## 截图 / Screenshots
 
-后端使用 Spring Boot + MyBatis-Plus + MySQL，不使用 Lombok。
+### 仪表盘
 
-## 维护约定
+<img width="1264" height="719" alt="Dashboard" src="https://github.com/user-attachments/assets/cfcfeef5-fd2f-43c3-9cde-ea0dfd34eba1" />
 
-- `frontend/dist`、`backend/target`、`node_modules` 等构建产物不作为源码维护，已经由 `.gitignore` 忽略。
-- README 中的端口、目录说明和启动方式需要随代码同步更新。
-<img width="1264" height="719" alt="image" src="https://github.com/user-attachments/assets/cfcfeef5-fd2f-43c3-9cde-ea0dfd34eba1" />
-<img width="1278" height="719" alt="image" src="https://github.com/user-attachments/assets/e1917730-b371-4672-b5a7-e4f48c2c5f74" />
+### 账单管理
 
+<img width="1278" height="719" alt="Bill Management" src="https://github.com/user-attachments/assets/e1917730-b371-4672-b5a7-e4f48c2c5f74" />
 
+## License
+
+MIT
