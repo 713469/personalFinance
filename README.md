@@ -123,10 +123,10 @@ personalfinancetracker/
 
 ## 设计约定 / Design Notes
 
-- **无 Lombok**：所有 Getter/Setter/构造器均手写或通过 IDE 生成，保持代码可读性
+- **无 Lombok**：使用Vscode有时候会出现依赖没有被加载而大量爆红，干脆直接不适用lombok
 - **BigDecimal 金额**：所有金额字段使用 `BigDecimal`，避免浮点精度问题
 - **统一响应格式**：`ApiResponse<T>` 包装所有接口返回，`PageResult<T>` 统一分页结构
-- **单用户闭环**：第一版按个人使用设计，不涉及多租户与权限
+- **单用户闭环**：单纯按个人使用设计，不涉及多租户与权限
 
 ## 截图 / Screenshots
 
@@ -140,4 +140,5 @@ personalfinancetracker/
 
 ## License
 
-MIT
+<img width="1274" height="725" alt="image" src="https://github.com/user-attachments/assets/f044547b-4650-4144-a5be-df17eac9a3a7" />
+
