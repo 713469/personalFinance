@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: personal-finance-tracker
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:43306}/personal_finance_tracker?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai}
+    username: ${SPRING_DATASOURCE_USERNAME:pft}
+    password: ${SPRING_DATASOURCE_PASSWORD:pft_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+server:
+  port: ${SERVER_PORT:48080}

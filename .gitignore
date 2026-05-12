@@ -1,0 +1,17 @@
+node_modules/
+dist/
+target/
+.idea/
+.vscode/
+*.iml
+**/*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+.devlogs/
+.playwright-mcp/
+.claude/settings.local.json
+.docker/buildx/
+*.tsbuildinfo
+

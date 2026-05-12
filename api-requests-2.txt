@@ -1,0 +1,8 @@
+34. [GET] http://127.0.0.1:45173/api/statistics/summary?month=2026-05 => [200] OK
+35. [GET] http://127.0.0.1:45173/api/accounts => [200] OK
+36. [GET] http://127.0.0.1:45173/api/categories => [200] OK
+37. [GET] http://127.0.0.1:45173/api/bills?pageNum=1&pageSize=10 => [200] OK
+38. [GET] http://127.0.0.1:45173/api/statistics/category-expense?month=2026-05 => [200] OK
+39. [GET] http://127.0.0.1:45173/api/statistics/monthly-trend?monthCount=6 => [200] OK
+
+Note: 33 static requests not shown, run with "static" option to see them.
