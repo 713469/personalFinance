@@ -43,7 +43,7 @@
 
 ### Docker 一键启动（推荐）
 
-需要下载docker
+需要先下载docker
 
 ```bash
 git clone https://github.com/713469/personalFinance.git
