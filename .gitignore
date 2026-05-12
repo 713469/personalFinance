@@ -14,4 +14,7 @@ target/
 .claude/settings.local.json
 .docker/buildx/
 *.tsbuildinfo
+api-requests*.txt
+image/
+docs/
 
