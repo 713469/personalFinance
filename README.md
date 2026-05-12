@@ -79,3 +79,7 @@ docker compose up -d --build
 
 - `frontend/dist`、`backend/target`、`node_modules` 等构建产物不作为源码维护，已经由 `.gitignore` 忽略。
 - README 中的端口、目录说明和启动方式需要随代码同步更新。
+<img width="1264" height="719" alt="image" src="https://github.com/user-attachments/assets/cfcfeef5-fd2f-43c3-9cde-ea0dfd34eba1" />
+<img width="1278" height="719" alt="image" src="https://github.com/user-attachments/assets/e1917730-b371-4672-b5a7-e4f48c2c5f74" />
+
+
